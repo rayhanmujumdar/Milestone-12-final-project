@@ -23,7 +23,7 @@ const Info = () => {
     }
 ]
     return (
-        <div className='lg:container lg:mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-5 mx-5'>
+        <div className='lg:container lg:mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10 mx-5'>
             {
                 infoData.map(info => <InfoCart info={info}></InfoCart>)
             
