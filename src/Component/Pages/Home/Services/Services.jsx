@@ -7,16 +7,19 @@ import whitening from "../../../../img-assets/images/whitening.png";
 const Services = () => {
   const serviceData = [
     {
+      _id: 1,
       img: fluoride,
       title: "Fluoride Treatment",
       text: "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the",
     },
     {
+      _id: 2,
       img: cavity,
       title: "Cavity Filling",
       text: "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the",
     },
     {
+      _id: 3,
       img: whitening,
       title: "Teeth Whitening",
       text: "Lorem Ipsum is simply dummy printing and typesetting indust Ipsum has been the",
@@ -32,7 +35,7 @@ const Services = () => {
       </div>
       <div className="lg:container lg:mx-auto grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-10 mx-5">
         {serviceData.map((service) => (
-          <Service service={service}></Service>
+          <Service key={service._id} service={service}></Service>
         ))}
       </div>
     </div>
