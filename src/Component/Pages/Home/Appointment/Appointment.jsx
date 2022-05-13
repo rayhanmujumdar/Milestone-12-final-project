@@ -5,20 +5,20 @@ import DoctorImg from "../../../../img-assets/images/doctor-small.png";
 
 const Appointment = () => {
   return (
-    <div className="flex justify-center items-center h-[80vh] w-full">
+    <div className="my-20">
       <div
-        className="bg-no-repeat bg-cover bg-center relative h-[50vh]"
+        className="bg-no-repeat bg-cover bg-center"
         style={{ background: `url(${appointmentImg})` }}
       >
-        <div className="mx-10">
-          <div className="md:block hidden absolute bottom-0 left-0">
+        <div className="mx-10 flex justify-center items-center md:container md:mx-auto">
+          <div className="md:block hidden flex-1">
             <img
               src={DoctorImg}
               alt=""
-              className="max-w-lg lg:h-[636px] lg:w-[606px] h-[400px]"
+              className="mx-auto max-w-lg mt-[-100px] lg:h-[636px] lg:w-[606px] h-[400px]"
             />
           </div>
-          <div className="text-left text-white my-5 p-2 md:w-2/4 md:float-right">
+          <div className="text-left text-white my-5 p-2 flex-1">
             <small className="text-[#19D3AE] font-semibold">Appointment</small>
             <div className="my-3">
               <h1 className="text-3xl font-semibold my-3">
@@ -33,7 +33,7 @@ const Appointment = () => {
                 desktop publishing packages and web page
               </p>
             </div>
-            <Button title={"get started"}></Button>
+            <Button>get started</Button>
           </div>
         </div>
       </div>

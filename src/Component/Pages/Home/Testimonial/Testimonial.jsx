@@ -29,7 +29,7 @@ const Testimonial = () => {
     },
   ];
   return (
-    <div>
+    <section className="container mx-auto">
       <div className="text-left ml-14 mb-20">
         <p className="font-semibold text-[#19D3AE]">Testimonial</p>
         <h1 className="text-3xl">What Our Patients Says</h1>
@@ -39,7 +39,7 @@ const Testimonial = () => {
           <PersonTes person={person}></PersonTes>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 
