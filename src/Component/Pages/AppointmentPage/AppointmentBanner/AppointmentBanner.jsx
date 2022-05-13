@@ -1,0 +1,28 @@
+import React, { useState } from "react";
+import chair from '../../../../img-assets/images/chair.png'
+import { DayPicker } from 'react-day-picker';
+
+const AppointmentBanner = ({date,setDate}) => {
+    console.log(date)
+  return (
+    <div className="flex my-40 justify-center items-center">
+      <div className="text-left md:order-1 order-2 md:basis-2/4 flex flex-col items-center justify-center">
+        <DayPicker
+        dateFormat="MM-DD-YYYY"
+        mode="single"
+        selected={date}
+        onSelect={setDate}
+        ></DayPicker>
+      </div>
+      <div className="md:order-2 order-1 md:basis-2/4">
+        <img
+          src={chair}
+          alt="Dentist Chair"
+          className="lg:max-w-xl md:max-w-sm  mx-auto rounded-md"
+        />
+      </div>
+    </div>
+  );
+};
+
+export default AppointmentBanner;

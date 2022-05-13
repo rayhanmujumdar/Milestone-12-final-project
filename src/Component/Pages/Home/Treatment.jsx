@@ -10,7 +10,7 @@ const treatment = () => {
     }
     return (
         <div className='lg:container lg:mx-auto my-20'>
-            <div className='flex mx-8 md:flex-row-reverse gap-x-10 justify-center items-center flex-col gap-y-3 lg:h-[80vh]'>
+            <div className='flex mx-8 md:flex-row-reverse gap-x-10 justify-center items-center flex-col gap-y-3 my-44'>
                 <Hero heroData={heroData}></Hero>
             </div>
         </div>

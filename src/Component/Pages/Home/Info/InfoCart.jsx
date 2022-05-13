@@ -2,7 +2,7 @@ import React from 'react';
 
 const InfoCart = ({info}) => {
     return (
-        <div className={`${info.bg} flex md:flex-row flex-col justify-center md:items-center gap-x-3 md:p-5 p-3 rounded-xl shadow-lg`}>
+        <div className={`${info.bg} mx-2 flex md:flex-row flex-col justify-center md:items-center gap-x-3 md:p-5 p-3 rounded-xl shadow-lg`}>
             <div className='md:basis-1/4'>
                  <img src={info.img} alt="" className='min-w-fit md:mx-0 mx-auto'/>
             </div>

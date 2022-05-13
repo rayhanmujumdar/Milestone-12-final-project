@@ -7,6 +7,7 @@ import Treatment from './Treatment';
 import Appointment from '../../Pages/Home/Appointment/Appointment';
 import Testimonial from './Testimonial/Testimonial';
 import ContactUs from './ContactUs/ContactUs';
+import Footer from '../../Shared/Footer/Footer';
 
 const Home = () => {
     return (
@@ -19,6 +20,7 @@ const Home = () => {
           <Appointment></Appointment>
           <Testimonial></Testimonial>
           <ContactUs></ContactUs>
+          <Footer></Footer>
         </div>
     );
 };
