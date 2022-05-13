@@ -4,6 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import Home from './Component/Pages/Home/Home';
 import NotFound from './Component/Shared/NotFound/NotFound';
 import Login from './Component/Pages/Login/Login';
+import Footer from './Component/Shared/Footer/Footer';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
+      <Footer></Footer>
     </div>
   );
 }
