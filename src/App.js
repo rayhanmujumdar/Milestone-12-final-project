@@ -6,8 +6,14 @@ import NotFound from './Component/Shared/NotFound/NotFound';
 import Login from './Component/Pages/Login/Login';
 import AppointmentPage from './Component/Pages/AppointmentPage/AppointmentPage.';
 import 'react-day-picker/dist/style.css';
+import { useEffect } from 'react';
+import Signup from './Component/Pages/Signup/Signup';
 
 function App() {
+  useEffect(() => {
+    const htmlTag = document.getElementById("html")
+    htmlTag.setAttribute("data-theme","light")
+  },[])
   return (
     <div className='App max-w-7xl mx-auto'>
       <Header></Header>
@@ -16,6 +22,7 @@ function App() {
         <Route path='home' element={<Home></Home>}></Route>
         <Route path='appointment' element={<AppointmentPage></AppointmentPage>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/signUp' element={<Signup></Signup>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
     </div>

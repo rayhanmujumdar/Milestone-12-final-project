@@ -10,7 +10,7 @@ const AvailableAppointMent = ({date}) => {
     const [treatment,setTreatment] = useState(null)
     const [modalIsOpen,setIsOpen] = useState(false)
     useEffect( () => {
-        axiosPrivate.get("services.json")
+        axiosPrivate.get("https://arcane-brook-53779.herokuapp.com/services")
         .then(res => {
             setServices(res.data)
         })

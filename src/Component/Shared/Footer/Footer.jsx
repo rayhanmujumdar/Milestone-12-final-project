@@ -5,7 +5,7 @@ const Footer = () => {
     const year = new Date().getFullYear()
     return (
         <footer className="text-left bg-no-repeat bg-cover bg-center" style={{"background": `url(${footerBg})`}}>
-        <div className="container p-6 mx-auto">
+        <div className="container p-6 mx-auto"> 
           <div className="flex flex-wrap md:flex-row flex-col justify-between">
             <div className="mb-6">
               <h5 className="uppercas e font-bold mb-2.5 text-gray-400">Services</h5>

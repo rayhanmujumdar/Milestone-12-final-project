@@ -34,6 +34,7 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
           onRequestClose={closeModal}
           style={customStyles}
           ariaHideApp={false}
+          overlayClassName={'overly'}
         >
           <button
             onClick={closeModal}
@@ -88,7 +89,7 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
                     
                   >
-                    {slots.map(slot => <option value={slot}>{slot}</option>)}
+                    {slots.map(slot => <option key={slot} value={slot}>{slot}</option>)}
                   </select>
                 </div>
               </div>
