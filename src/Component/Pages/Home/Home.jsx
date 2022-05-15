@@ -12,7 +12,7 @@ import Footer from '../../Shared/Footer/Footer';
 const Home = () => {
     return (
         <div className=''>
-          <PageTitle title={'home'}></PageTitle>
+          <PageTitle title={'Home'}></PageTitle>
           <Banner></Banner>
           <Info></Info>
           <Services></Services>
