@@ -1,19 +1,87 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect } from "react";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../Shared/Button/Button";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
+import {
+  useAuthState,
+  useSignInWithEmailAndPassword
+} from "react-firebase-hooks/auth";
+import auth from "../../../Firebase/firebase.init";
+import toast from "react-hot-toast";
+import { useForm } from "react-hook-form";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
+import Loading from "../../Shared/Loading/Loading";
 
 const Login = () => {
+  //use sign In react-firebase-hooks
+  const [signInWithEmailAndPassword, LoginUser, LoginLoading, LoginError] =
+    useSignInWithEmailAndPassword(auth);
+    // react-hooks-form hooks
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm();
+  const onSubmit = (data) => {
+    const { email, password } = data;
+    signInWithEmailAndPassword(email, password);
+  };
+  // login user toast success
+  useEffect(() => {
+    if (LoginUser) {
+      toast.success("SuccessFully login", {
+        id: "success",
+      });
+    }
+  },[LoginUser])
+  // location route changeing
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [user] = useAuthState(auth);
+  const from = location?.state?.from?.pathname || "/";
+  // google error handle to toast
+  useEffect(() => {
+    if (LoginError) {
+      toast.error(LoginError?.code, {
+        id: "error",
+        duration: 2000,
+      });
+    }
+  },[LoginError])
+ //user find to route change
+  useEffect(() => {
+    if (user) {
+      navigate(from, { replace: true });
+    }
+  }, [user]);
   return (
     <div className="flex justify-center items-center h-[90vh]">
+      <PageTitle title={"Login"}></PageTitle>
       <div className="card max-w-xl bg-base-100 shadow-xl rounded-3xl">
         <div className="card-body items-center">
           <h2 className="card-title text-3xl my-2">Login</h2>
-          <form className="flex flex-col gap-y-2">
-              <label 
-              className="text-left text-xl" htmlFor="exampleFormControlInput1">Email</label>
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-y-2"
+          >
+            <label
+              className="text-left text-xl"
+              htmlFor="exampleFormControlInput1"
+            >
+              Email
+            </label>
             <input
-              type="Email"
+              {...register("email", {
+                required: {
+                  value: true,
+                  message: "email is require",
+                },
+                pattern: {
+                  value: /[a-z0-9]+@[a-z]+\.[a-z]{2,3}/,
+                  message: "Provide a Invalid Email",
+                },
+              })}
+              type="text"
               className="
               form-control
               block
@@ -34,10 +102,30 @@ const Login = () => {
               id="exampleFormControlInput1"
               placeholder="Email"
             />
-            <label 
-            className="text-left text-xl"
-            htmlFor="exampleFormControlInput1">Password</label>
+            {errors.email?.type === "required" && (
+              <p className="text-left text-red-500">{errors?.email?.message}</p>
+            )}
+            {errors.email?.type === "pattern" && (
+              <p className="text-left text-red-500">{errors?.email?.message}</p>
+            )}
+
+            <label
+              className="text-left text-xl"
+              htmlFor="exampleFormControlInput1"
+            >
+              Password
+            </label>
             <input
+              {...register("password", {
+                required: {
+                  value: true,
+                  message: "password required",
+                },
+                minLength: {
+                  value: 6,
+                  message: "password must be 6 character",
+                },
+              })}
               type="password"
               className="
               form-control
@@ -59,18 +147,39 @@ const Login = () => {
               id="exampleFormControlInput1"
               placeholder="Password"
             />
-            <p className="text-left">Forget Password</p>
+            {errors.password?.type === "required" && (
+              <p className="text-left text-red-500">
+                {errors?.password?.message}
+              </p>
+            )}
+            {errors.password?.type === "minLength" && (
+              <p className="text-left text-red-500">
+                {errors?.password?.message}
+              </p>
+            )}
+            <p className="text-left cursor-pointer hover:underline">
+              Forget Password
+            </p>
             <Button
               type="submit"
-              className="w-full bg-[#3A4256] p-2 text-white rounded-md"
+              className="w-full bg-[#3A4256] p-2 text-white rounded-md flex gap-x-2 justify-center items-center"
             >
               Submit
+              {LoginLoading && <Loading className="w-4 h-4"></Loading>}
             </Button>
           </form>
           <div>
-              <p>New to Doctors Portal? <Link to="/signUp" className="text-[#19D3AE]">Create new account</Link></p>
+            <p>
+              <small>
+                {" "}
+                New to Doctors Portal?{" "}
+                <Link to="/signUp" className="text-[#19D3AE] hover:underline">
+                  Create new account
+                </Link>
+              </small>
+            </p>
           </div>
-          <SocialLogin></SocialLogin>
+          <SocialLogin from={from}></SocialLogin>
         </div>
       </div>
     </div>
