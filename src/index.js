@@ -22,7 +22,7 @@ root.render(
         </React.StrictMode>
       </BrowserRouter>
     </HelmetProvider>
-    <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools>
+    {/* <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools> */}
   </QueryClientProvider>
 );
 

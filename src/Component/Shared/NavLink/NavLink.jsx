@@ -7,7 +7,7 @@ const NavLink = ({children,to,...props}) => {
   return (
     <div>
       <Link
-        className={`nav-link relative ${match && 'text-white'} flex justify-left md:m-0 mt-3 pl-2`}
+        className={`nav-link relative ${match && 'text-white'} flex justify-left md:m-0 mt-3 lg:pl-2 md:px-3 pl-2`}
         to={to}
         {...props}
       >

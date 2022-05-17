@@ -19,7 +19,7 @@ const AvailableAppointMent = ({ date }) => {
   if (isLoading) {
     return <Loading className='w-8 h-8'></Loading>
   }
-  const {data:services } = data
+  const { data: services } = data
   return (
     <div className="mb-10">
       <h5 className="text-xl font-semibold text-[#19D3AE] my-20">

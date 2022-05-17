@@ -1,7 +1,7 @@
 import { signOut } from "firebase/auth";
 import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import auth from "../../../Firebase/firebase.init";
 import NavLink from "../NavLink/NavLink";
 
@@ -11,6 +11,8 @@ const Header = () => {
   const handleNav = (open) => {
     setNav(open);
   };
+  const location = useLocation()
+  console.log()
   return (
     <header>
       <nav
@@ -24,7 +26,13 @@ const Header = () => {
         navbar navbar-expand-lg navbar-light
         "
       >
-        <div className="lg:container sm:container mx-auto w-full flex flex-wrap items-center justify-end px-3">
+        <div className="lg:container sm:container mx-auto w-full flex flex-wrap justify-between items-center px-3">
+          {location.pathname.includes('/dashboard') && <label
+            htmlFor="dashboard-sidebar"
+            className="btn btn-primary drawer-button lg:hidden"
+          >
+            Dashboard
+          </label>}
           <button
             onClick={() => handleNav(!nav)}
             className="
@@ -55,6 +63,7 @@ const Header = () => {
               <i className="fa fa-navicon text-2xl" aria-hidden="true"></i>
             )}
           </button>
+          
           <div
             className="collapse navbar-collapse flex-grow items-center"
             id="navbarSupportedContent"
@@ -111,6 +120,11 @@ const Header = () => {
                   About
                 </NavLink>
               </li>
+              {user && <li className="nav-item p-2">
+                <NavLink to="/dashboard" href="#">
+                Dashboard
+                </NavLink>
+              </li>}
               <li className="nav-item p-2">
                 {user ? (
                   <button
