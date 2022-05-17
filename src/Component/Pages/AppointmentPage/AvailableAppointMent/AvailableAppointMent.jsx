@@ -1,22 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
 import axiosPrivate from "../../../Shared/axiosPrivate/axiosPrivate";
 import Service from "../../../Pages/AppointmentPage/Service/Service";
 import BookingModal from "../BookingModal/BookingModal";
+import { useQuery } from "react-query";
+import Loading from "../../../Shared/Loading/Loading";
 
 const AvailableAppointMent = ({ date }) => {
-  const [services, setServices] = useState([]);
   const [treatment, setTreatment] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [load,setLoad] = useState(false)
   const newDate = format(date, "PP");
-  useEffect(() => {
     //   https://arcane-brook-53779.herokuapp.com/services
+  const {data,isLoading,error,refetch} = useQuery(['available', newDate], async () => {
     const url = `http://localhost:5000/available?date=${newDate}`
-    axiosPrivate.get(url).then((res) => {
-      setServices(res.data);
-    });
-  }, [load,newDate]);
+    return axiosPrivate.get(url)
+  })
+  if (isLoading) {
+    return <Loading className='w-8 h-8'></Loading>
+  }
+  const {data:services } = data
   return (
     <div className="mb-10">
       <h5 className="text-xl font-semibold text-[#19D3AE] my-20">
@@ -34,6 +37,7 @@ const AvailableAppointMent = ({ date }) => {
       </div>
       {treatment && (
         <BookingModal
+        refetch={refetch}
           load={load}
           setLoad={setLoad}
           date={newDate}

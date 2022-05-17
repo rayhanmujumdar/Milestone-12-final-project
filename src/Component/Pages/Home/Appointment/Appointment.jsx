@@ -15,7 +15,7 @@ const Appointment = () => {
             <img
               src={DoctorImg}
               alt=""
-              className="mx-auto max-w-lg mt-[-100px] lg:h-[636px] lg:w-[606px] h-[400px]"
+              className="mx-auto max-w-lg md:mt-20 lg:mt-[-100px] lg:h-[636px] lg:w-[606px] h-[400px]"
             />
           </div>
           <div className="text-left text-white my-5 p-2 flex-1">

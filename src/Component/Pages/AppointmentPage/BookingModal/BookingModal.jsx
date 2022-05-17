@@ -7,7 +7,7 @@ import auth from "../../../../Firebase/firebase.init";
 import axiosPrivate from "../../../Shared/axiosPrivate/axiosPrivate";
 import toast from "react-hot-toast";
 
-const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date,setLoad,load }) => {
+const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date,refetch }) => {
   // user auth state
   const [user] = useAuthState(auth);
   const { _id, name, slots } = treatment;
@@ -42,8 +42,8 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date,setLoad,load }) 
         id: "error",
       });
     }
+    refetch()
     setIsOpen(false);
-    setLoad(!load)
   };
   // modal style
   const customStyles = {

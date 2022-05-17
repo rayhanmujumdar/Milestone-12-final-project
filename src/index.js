@@ -5,6 +5,7 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
+import { ReactQueryDevtools } from 'react-query/devtools'
 import 'tw-elements';
  import {
    QueryClient,
@@ -21,6 +22,7 @@ root.render(
         </React.StrictMode>
       </BrowserRouter>
     </HelmetProvider>
+    <ReactQueryDevtools initialIsOpen={true}></ReactQueryDevtools>
   </QueryClientProvider>
 );
 

@@ -84,7 +84,7 @@ const Header = () => {
               </Link>
             </div>
             {/* Left links */}
-            <ul className="navbar-nav md:flex block flex-col justify-center items-center pl-0 list-style-none mr-auto w-full">
+            <ul className="navbar-nav md:flex block flex-col lg:justify-end items-center pl-0 list-style-none mr-auto w-full">
               <li className="nav-item p-2">
                 <NavLink to="home" href="#">
                   Home
