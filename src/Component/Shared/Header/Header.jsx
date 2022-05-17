@@ -130,7 +130,6 @@ const Header = () => {
           </div>
         </div>
       </nav>
-      <h1>this</h1>
     </header>
   );
 };

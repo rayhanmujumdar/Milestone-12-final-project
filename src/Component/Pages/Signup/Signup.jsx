@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { useCreateUserWithEmailAndPassword, useSignInWithEmailAndPassword, useUpdateProfile } from "react-firebase-hooks/auth";
+import {
+  useCreateUserWithEmailAndPassword,
+  useUpdateProfile,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,12 +13,11 @@ import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const Signup = () => {
   //create sign up user hooks
-  const [createUserWithEmailAndPassword , user,
-    loading,
-    error] = useCreateUserWithEmailAndPassword(auth)
+  const [createUserWithEmailAndPassword, user, loading, error] =
+    useCreateUserWithEmailAndPassword(auth);
 
   const [passValue, setPassValue] = useState("");
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   //update name and photo url hooks
   const {
     register,
@@ -25,34 +27,32 @@ const Signup = () => {
   const [updateProfile, updating] = useUpdateProfile(auth);
   //handle sign up user
   const onSubmit = async (data) => {
-    try{
-      const {email,password,name} = data
-      await createUserWithEmailAndPassword(email,password)
-      console.log(email,password)
-      await updateProfile({ displayName: name})
-    }
-    catch(error){
-      toast.error(error.message)
+    try {
+      const { email, password, name } = data;
+      await createUserWithEmailAndPassword(email, password);
+      console.log(email, password);
+      await updateProfile({ displayName: name });
+    } catch (error) {
+      toast.error(error.message);
     }
   };
   // user navigate and sign in
   useEffect(() => {
-    if(user){
-      toast.success("successfully sign up",{
-        id: 'success'
-      })
-      navigate('/')
+    if (user) {
+      toast.success("successfully sign up", {
+        id: "success",
+      });
+      navigate("/");
     }
-  },[user])
+  }, [user]);
   // user error
   useEffect(() => {
-    if(error){
-      toast.error(error.code,{
-        id: 'error'
-      })
+    if (error) {
+      toast.error(error.code, {
+        id: "error",
+      });
     }
-  },[error])
-  console.log(errors.checkbox?.message)
+  }, [error]);
   return (
     <div className="flex justify-center items-center h-[90vh]">
       <div className="card max-w-xl bg-base-100 shadow-xl rounded-3xl">
@@ -221,7 +221,7 @@ const Signup = () => {
                     message: "confirm password is required",
                   },
                   validate: {
-                    match: (value) => value === passValue
+                    match: (value) => value === passValue,
                   },
                 })}
                 className="
@@ -279,9 +279,7 @@ const Signup = () => {
               }`}
             >
               Sign up
-              {
-                loading && <Loading className='w-4 h-4 bg-white'></Loading>
-              }
+              {loading && <Loading className="w-4 h-4 bg-white"></Loading>}
             </Button>
           </form>
           <div>

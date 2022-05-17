@@ -1,20 +1,51 @@
 import React from "react";
 import Modal from "react-modal";
 import Button from "../../../Shared/Button/Button";
-import { format } from "date-fns";
 import "./BookingModal.css";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../../Firebase/firebase.init";
+import axiosPrivate from "../../../Shared/axiosPrivate/axiosPrivate";
+import toast from "react-hot-toast";
 
-const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
-  const { name, slots } = treatment;
+const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date,setLoad,load }) => {
+  // user auth state
+  const [user] = useAuthState(auth);
+  const { _id, name, slots } = treatment;
+  // modal close function
   const closeModal = () => {
     setIsOpen(false);
   };
-  const handleBooking = e => {
-    e.preventDefault()
-    const slot = e.target.slot.value
-    console.log(slot)
+  // handle booking service
+  const handleBooking = async (e) => {
+    e.preventDefault();
+    const slot = e.target.slot.value;
+    // input data set to database
+    const booking = {
+      treatmentId: _id,
+      treatment: name,
+      date,
+      slot,
+      patientEmail: user?.email,
+      patient: user?.displayName,
+      phone: e.target.phoneNumber.value,
+    };
+    const url = `http://localhost:5000/booking`;
+    const { data } = await axiosPrivate.post(url, booking);
+    // const { data } = await axiosPrivate.get(url, booking);
+    console.log(data);
+    if (data?.success) {
+      toast.success("Booking Success", {
+        id: "success",
+      });
+    } else {
+      toast.error("already booked at " + data.booking.slot, {
+        id: "error",
+      });
+    }
     setIsOpen(false);
-  }
+    setLoad(!load)
+  };
+  // modal style
   const customStyles = {
     content: {
       top: "50%",
@@ -34,7 +65,7 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
           onRequestClose={closeModal}
           style={customStyles}
           ariaHideApp={false}
-          overlayClassName={'overly'}
+          overlayClassName={"overly"}
         >
           <button
             onClick={closeModal}
@@ -46,7 +77,7 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
           <form onSubmit={handleBooking} className="flex flex-col gap-y-4">
             <input
               type="text"
-              value={format(date, "PP")}
+              value={date}
               readOnly
               className="
               form-control
@@ -66,12 +97,13 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
               focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
             "
               id="exampleFormControlInput1"
+              name="date"
             />
             <div>
               <div className="flex justify-center">
                 <div className="mb-3 xl:w-96">
                   <select
-                  name="slot"
+                    name="slot"
                     className="form-select appearance-none
                     block
                     w-96
@@ -87,9 +119,12 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
                     ease-in-out
                     m-0
                     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                    
                   >
-                    {slots.map(slot => <option key={slot} value={slot}>{slot}</option>)}
+                    {slots.map((slot, index) => (
+                      <option key={index} value={slot}>
+                        {slot}
+                      </option>
+                    ))}
                   </select>
                 </div>
               </div>
@@ -115,6 +150,9 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
             "
               id="exampleFormControlInput1"
               placeholder="Full Name"
+              name="name"
+              value={user?.displayName}
+              disabled
             />
             <input
               type="number"
@@ -137,6 +175,8 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
             "
               id="exampleFormControlInput1"
               placeholder="Phone Number"
+              name="phoneNumber"
+              required
             />
             <input
               type="Email"
@@ -159,6 +199,9 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date }) => {
             "
               id="exampleFormControlInput1"
               placeholder="Email"
+              name="email"
+              disabled
+              value={user?.email}
             />
             <Button
               type="submit"
