@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/firebase.init";
+import useToken from "../../../Hooks/useToken";
 import Button from "../../Shared/Button/Button";
 import Loading from "../../Shared/Loading/Loading";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
@@ -25,6 +26,8 @@ const Signup = () => {
     formState: { errors },
   } = useForm();
   const [updateProfile, updating] = useUpdateProfile(auth);
+  // token customs hooks
+  const [token] = useToken(user);
   //handle sign up user
   const onSubmit = async (data) => {
     try {
@@ -38,7 +41,7 @@ const Signup = () => {
   };
   // user navigate and sign in
   useEffect(() => {
-    if (user) {
+    if (token) {
       toast.success("successfully sign up", {
         id: "success",
       });

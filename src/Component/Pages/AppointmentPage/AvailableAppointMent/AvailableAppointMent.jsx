@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { format } from "date-fns";
 import axiosPrivate from "../../../Shared/axiosPrivate/axiosPrivate";
 import Service from "../../../Pages/AppointmentPage/Service/Service";
 import BookingModal from "../BookingModal/BookingModal";
 import { useQuery } from "react-query";
 import Loading from "../../../Shared/Loading/Loading";
+import toast from "react-hot-toast";
 
 const AvailableAppointMent = ({ date }) => {
   const [treatment, setTreatment] = useState(null);
@@ -17,16 +18,19 @@ const AvailableAppointMent = ({ date }) => {
     return axiosPrivate.get(url)
   })
   if (isLoading) {
-    return <Loading className='w-8 h-8'></Loading>
+    return <Loading className="w-8 h-8"></Loading>;
   }
-  const { data: services } = data
+  if (error) {
+    return <p className="text-red-500 text-xl">Network Error</p>
+  }
+  const { data: services } = data;
   return (
     <div className="mb-10">
       <h5 className="text-xl font-semibold text-[#19D3AE] my-20">
         Available Appointments on {newDate}
       </h5>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-5 mx-10">
-        {services.map((service) => (
+        {services?.map((service) => (
           <Service
             setIsOpen={setIsOpen}
             key={service._id}

@@ -1,7 +1,6 @@
 import React from "react";
 
 const Loading = ({ className, ...props }) => {
-    console.log(className)
   return (
     <div {...props} className="flex justify-center items-center">
       <div

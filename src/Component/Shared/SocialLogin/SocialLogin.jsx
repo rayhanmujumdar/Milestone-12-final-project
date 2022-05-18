@@ -3,6 +3,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import auth from "../../../Firebase/firebase.init";
+import useToken from "../../../Hooks/useToken";
 import Button from "../Button/Button";
 import Loading from "../Loading/Loading";
 
@@ -10,14 +11,15 @@ const SocialLogin = ({from}) => {
   const [signInWithGoogle, googleUser, googleLoading, googleError] =
     useSignInWithGoogle(auth);
     const navigate = useNavigate()
+    const [token] = useToken(googleUser);
     useEffect(() => {
-      if (googleUser) {
+      if (token) {
         toast.success("successfully login", {
           id: "success",
         });
-        navigate(from || '/',{replace: true})
+        navigate(from || "/", { replace: true });
       }
-    }, [googleUser]);
+    }, [token]);
     useEffect(() => {
       if (googleError) {
         toast.error(googleError?.code, {
