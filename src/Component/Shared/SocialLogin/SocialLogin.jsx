@@ -12,6 +12,7 @@ const SocialLogin = ({from}) => {
     useSignInWithGoogle(auth);
     const navigate = useNavigate()
     const [token] = useToken(googleUser);
+    console.log(token)
     useEffect(() => {
       if (token) {
         toast.success("successfully login", {

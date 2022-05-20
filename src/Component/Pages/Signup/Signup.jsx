@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
+  useAuthState,
   useCreateUserWithEmailAndPassword,
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
@@ -13,8 +14,9 @@ import Loading from "../../Shared/Loading/Loading";
 import SocialLogin from "../../Shared/SocialLogin/SocialLogin";
 
 const Signup = () => {
+  const [user] = useAuthState(auth)
   //create sign up user hooks
-  const [createUserWithEmailAndPassword, user, loading, error] =
+  const [createUserWithEmailAndPassword, signUpUser, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
 
   const [passValue, setPassValue] = useState("");
@@ -28,6 +30,7 @@ const Signup = () => {
   const [updateProfile, updating] = useUpdateProfile(auth);
   // token customs hooks
   const [token] = useToken(user);
+  console.log(token)
   //handle sign up user
   const onSubmit = async (data) => {
     try {
@@ -47,7 +50,7 @@ const Signup = () => {
       });
       navigate("/");
     }
-  }, [user]);
+  }, [token]);
   // user error
   useEffect(() => {
     if (error) {

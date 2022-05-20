@@ -13,8 +13,9 @@ import PrivateAuth from './Component/Shared/PrivateAuth/PrivateAuth';
 import Dashboard from './Component/Pages/Dashboard/Dashboard';
 import MyAppointments from './Component/Pages/Dashboard/MyAppointments';
 import MyReviews from './Component/Pages/Dashboard/MyReviews';
-import Table from './Component/Pages/Dashboard/Table.jsx'
 import MyHistory from './Component/Pages/Dashboard/MyHistory';
+import Users from './Component/Pages/Dashboard/Users';
+import PrivateAdmin from './Component/Shared/PrivateAdmin/PrivateAdmin';
 
 function App() {
   useEffect(() => {
@@ -34,7 +35,7 @@ function App() {
           <Route index element={<MyAppointments></MyAppointments>}></Route>
           <Route path='review' element={ <MyReviews></MyReviews>}></Route>
           <Route path='history' element={<MyHistory></MyHistory>}></Route>
-          <Route></Route>
+          <Route path='users' element={<PrivateAdmin><Users></Users></PrivateAdmin>}></Route>
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signUp' element={<Signup></Signup>}></Route>

@@ -12,7 +12,10 @@ const Header = () => {
     setNav(open);
   };
   const location = useLocation()
-  console.log()
+  const handleSignOut = () => {
+    signOut(auth)
+    localStorage.removeItem('accessToken')
+  }
   return (
     <header>
       <nav
@@ -129,7 +132,7 @@ const Header = () => {
                 {user ? (
                   <button
                     className="btn px-5 whitespace-nowrap"
-                    onClick={() => signOut(auth)}
+                    onClick={() => handleSignOut()}
                   >
                     Sign Out
                   </button>

@@ -2,8 +2,8 @@ import React from 'react';
 
 const table = ({appointment}) => {
     return (
-      <div class="overflow-x-auto">
-        <table class="table w-full">
+      <div className="overflow-x-auto">
+        <table className="table w-full">
           {/* <!-- head --> */}
           <thead>
             <tr>
@@ -18,7 +18,7 @@ const table = ({appointment}) => {
             {/* <!-- row 1 --> */}
             {appointment.map((app, index) => {
               return (
-                <tr>
+                <tr key={app._id}>
                   <th>{index + 1}</th>
                   <td>{app.patient}</td>
                   <td>{app.date}</td>

@@ -11,12 +11,16 @@ import toast from "react-hot-toast";
 import { useForm } from "react-hook-form";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import Loading from "../../Shared/Loading/Loading";
+import useToken from "../../../Hooks/useToken";
 
 const Login = () => {
+  const [user,loading] = useAuthState(auth);
   //use sign In react-firebase-hooks
   const [signInWithEmailAndPassword, LoginUser, LoginLoading, LoginError] =
-    useSignInWithEmailAndPassword(auth);
-    // react-hooks-form hooks
+  useSignInWithEmailAndPassword(auth);
+  console.log(user?.email)
+  const [token] = useToken(user)
+  // react-hooks-form hooks
   const {
     register,
     formState: { errors },
@@ -37,7 +41,7 @@ const Login = () => {
   // location route changeing
   const location = useLocation();
   const navigate = useNavigate();
-  const [user] = useAuthState(auth);
+  
   const from = location?.state?.from?.pathname || "/";
   // google error handle to toast
   useEffect(() => {
@@ -48,12 +52,15 @@ const Login = () => {
       });
     }
   },[LoginError])
- //user find to route change
+  //user find to route change
   useEffect(() => {
-    if (user) {
+    if (token || user) {
       navigate(from, { replace: true });
     }
-  }, [user]);
+  }, [token,navigate,from,user]);
+  if(loading){
+    return <Loading className='w-8 h-8'></Loading>
+  }
   return (
     <div className="flex justify-center items-center h-[90vh]">
       <PageTitle title={"Login"}></PageTitle>

@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { format } from "date-fns";
 import axiosPrivate from "../../../Shared/axiosPrivate/axiosPrivate";
 import Service from "../../../Pages/AppointmentPage/Service/Service";
 import BookingModal from "../BookingModal/BookingModal";
 import { useQuery } from "react-query";
 import Loading from "../../../Shared/Loading/Loading";
-import toast from "react-hot-toast";
 
 const AvailableAppointMent = ({ date }) => {
   const [treatment, setTreatment] = useState(null);
