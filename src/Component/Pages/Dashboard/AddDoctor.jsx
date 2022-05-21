@@ -157,7 +157,7 @@ const AddDoctor = () => {
               message: "Specialty is required",
             },
           })}
-          class="select w-full border border-gray-300">
+          className="select w-full border border-gray-300">
           {services?.data.map((service, index) => (
               <option key={index}>{service.name}</option>
             ))}

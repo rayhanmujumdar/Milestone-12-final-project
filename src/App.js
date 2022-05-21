@@ -18,6 +18,7 @@ import Users from './Component/Pages/Dashboard/Users';
 import PrivateAdmin from './Component/Shared/PrivateAdmin/PrivateAdmin';
 import AddDoctor from './Component/Pages/Dashboard/AddDoctor';
 import ManageDoctors from './Component/Pages/Dashboard/ManageDoctors';
+import Payment from './Component/Pages/Dashboard/Payment';
 
 function App() {
   useEffect(() => {
@@ -40,6 +41,7 @@ function App() {
           <Route path='users' element={<PrivateAdmin><Users></Users></PrivateAdmin>}></Route>
           <Route path='addDoctor' element={<PrivateAdmin><AddDoctor></AddDoctor></PrivateAdmin>}></Route>
           <Route path='manageDoctors' element={<PrivateAdmin><ManageDoctors></ManageDoctors></PrivateAdmin>}></Route>
+          <Route path='payment/:id' element={<Payment></Payment>}></Route>
         </Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='/signUp' element={<Signup></Signup>}></Route>

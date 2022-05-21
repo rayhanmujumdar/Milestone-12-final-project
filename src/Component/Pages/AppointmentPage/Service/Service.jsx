@@ -2,7 +2,7 @@ import React from "react";
 import Button from "../../../Shared/Button/Button";
 
 const Service = ({ service, setTreatment, setIsOpen }) => {
-  const { name, slots } = service;
+  const { name, slots,price } = service;
   const openModal = (service) => {
     setTreatment(service);
     setIsOpen(true);
@@ -20,6 +20,7 @@ const Service = ({ service, setTreatment, setIsOpen }) => {
       <p className="uppercase">
         {slots.length} {slots.length > 1 ? "Spaces" : "space"} available
       </p>
+      <p><small>Price: $ {price}</small></p>
       <div>
         <Button
           htmlFor={"modal"}

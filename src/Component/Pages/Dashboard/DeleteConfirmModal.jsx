@@ -28,20 +28,20 @@ const DeleteConfirmModal = ({setDeletedDoctor, deleteDoctor, refetch }) => {
   return (
     <div>
       {/* <!-- Put this part before </body> tag --> */}
-      <input type="checkbox" id="delete-confirm" class="modal-toggle" />
-      <div class="modal modal-bottom sm:modal-middle">
-        <div class="modal-box">
-          <h3 class="font-bold text-lg">
+      <input type="checkbox" id="delete-confirm" className="modal-toggle" />
+      <div className="modal modal-bottom sm:modal-middle">
+        <div className="modal-box">
+          <h3 className="font-bold text-lg">
             Are you sure you want to delete {name}
           </h3>
-          <p class="py-4 text-red-500">
+          <p className="py-4 text-red-500">
             if you this delete you didn't return back..Be careful
           </p>
-          <div class="modal-action">
+          <div className="modal-action">
             <button className="btn" onClick={() => handleDelete(email)}>
               delete
             </button>
-            <label for="delete-confirm" class="btn">
+            <label for="delete-confirm" className="btn">
               Cancel
             </label>
           </div>

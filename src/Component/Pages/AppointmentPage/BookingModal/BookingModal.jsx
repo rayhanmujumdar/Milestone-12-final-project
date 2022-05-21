@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date,refetch }) => {
   // user auth state
   const [user] = useAuthState(auth);
-  const { _id, name, slots } = treatment;
+  const { _id, name, slots,price } = treatment;
   // modal close function
   const closeModal = () => {
     setIsOpen(false);
@@ -25,6 +25,7 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date,refetch }) => {
       treatment: name,
       date,
       slot,
+      price,
       patientEmail: user?.email,
       patient: user?.displayName,
       phone: e.target.phoneNumber.value,
