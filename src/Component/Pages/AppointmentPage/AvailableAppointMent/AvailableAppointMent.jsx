@@ -13,7 +13,7 @@ const AvailableAppointMent = ({ date }) => {
   const newDate = format(date, "PP");
     //   https://arcane-brook-53779.herokuapp.com/services
   const {data,isLoading,error,refetch} = useQuery(['available', newDate], async () => {
-    const url = `http://localhost:5000/available?date=${newDate}`
+    const url = `https://arcane-brook-53779.herokuapp.com/available?date=${newDate}`
     return axiosPrivate.get(url)
   })
   if (isLoading) {

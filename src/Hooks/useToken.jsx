@@ -8,7 +8,7 @@ const useToken = (user) => {
         const currentUser = { email }
         const myToken = async () => {
              if (email) {
-              const url = `http://localhost:5000/user/${email}`;
+              const url = `https://arcane-brook-53779.herokuapp.com/user/${email}`;
               const { data } = await axiosPrivate.put(url, currentUser);
               const accessToken = data?.token;
               localStorage.setItem('accessToken',accessToken);

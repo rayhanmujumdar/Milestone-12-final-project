@@ -12,7 +12,7 @@ const PrivateAdmin = ({children}) => {
     if (loading || isLoading) {
       return <Loading className="w-8 h-8"></Loading>;
     }
-    console.log(user,!data?.data?.admin)
+    console.log(data?.data?.admin)
     if (!data?.data?.admin) {
         // console.log('admin')
         // signOut(auth)

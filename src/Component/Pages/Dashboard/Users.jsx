@@ -6,7 +6,7 @@ import UserRow from "./UserRow";
 
 const Users = () => {
   const { data: users, isLoading,refetch } = useQuery("users", () => {
-    return axiosPrivate.get("http://localhost:5000/user");
+    return axiosPrivate.get("https://arcane-brook-53779.herokuapp.com/user");
   });
   if (isLoading) {
     return <Loading></Loading>;

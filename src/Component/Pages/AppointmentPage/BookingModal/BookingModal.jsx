@@ -29,7 +29,7 @@ const BookingModal = ({ treatment, setIsOpen, modalIsOpen, date,refetch }) => {
       patient: user?.displayName,
       phone: e.target.phoneNumber.value,
     };
-    const url = `http://localhost:5000/booking`;
+    const url = `https://arcane-brook-53779.herokuapp.com/booking`;
     const { data } = await axiosPrivate.post(url, booking);
     // const { data } = await axiosPrivate.get(url, booking);
     console.log(data);

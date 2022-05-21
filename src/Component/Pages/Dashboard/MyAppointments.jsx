@@ -12,12 +12,11 @@ import Table from "./Table";
 const MyAppointments = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  console.log(user?.email)
   const { isLoading, error, data } = useQuery(
     "MyAppointment",
     async () => {
       if (user?.email) {
-        const url = `http://localhost:5000/booking?email=${user?.email}`;
+        const url = `https://arcane-brook-53779.herokuapp.com/booking?email=${user?.email}`;
         return axiosPrivate.get(url);
       }
     }
