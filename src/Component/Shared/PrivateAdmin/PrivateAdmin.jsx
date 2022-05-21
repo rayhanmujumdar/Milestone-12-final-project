@@ -1,4 +1,3 @@
-import { signOut } from "firebase/auth";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { Navigate, useLocation } from "react-router-dom";
 import auth from "../../../Firebase/firebase.init";
@@ -12,7 +11,6 @@ const PrivateAdmin = ({children}) => {
     if (loading || isLoading) {
       return <Loading className="w-8 h-8"></Loading>;
     }
-    console.log(data?.data?.admin)
     if (!data?.data?.admin) {
         // console.log('admin')
         // signOut(auth)
